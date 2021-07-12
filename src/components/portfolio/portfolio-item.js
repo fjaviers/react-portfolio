@@ -11,38 +11,40 @@ export default class PortfolioItem extends Component {
   }
 
   handleMouseEnter() {
-    this.setState({ portfolioItemClass: "image-blur" }); // al poner el raton se oscurece
+    this.setState({ portfolioItemClass: "image-blur" });
   }
 
   handleMouseLeave() {
-    this.setState({ portfolioItemClass: "" }); // al levantarlo vuelve a la normalidad
+    this.setState({ portfolioItemClass: "" });
   }
 
   render() {
     const { id, description, thumb_image_url, logo_url } = this.props.item;
     return (
-      <div
-        className="portfolio-item-wrapper"
-        onMouseEnter={() => this.handleMouseEnter()} // para que cargue y se ejecute cuando estemos encima 
-        onMouseLeave={() => this.handleMouseLeave()} // para que cargue y se ejecute cuando quitemos el raton  
-      >
+      <Link to={`/portfolio/${id}`}>
         <div
-          className={
-            "portfolio-img-background " + this.state.portfolioItemClass  // trae la clase que hace que se sombree
-          }
-          style={{
-            backgroundImage: "url(" + thumb_image_url + ")"
-          }}
-        />
+          className="portfolio-item-wrapper"
+          onMouseEnter={() => this.handleMouseEnter()}
+          onMouseLeave={() => this.handleMouseLeave()}
+        >
+          <div
+            className={
+              "portfolio-img-background " + this.state.portfolioItemClass
+            }
+            style={{
+              backgroundImage: "url(" + thumb_image_url + ")"
+            }}
+          />
 
-        <div className="img-text-wrapper">
-          <div className="logo-wrapper">
-            <img src={logo_url} />
+          <div className="img-text-wrapper">
+            <div className="logo-wrapper">
+              <img src={logo_url} />
+            </div>
+
+            <div className="subtitle">{description}</div>
           </div>
-
-          <div className="subtitle">{description}</div>
         </div>
-      </div>
+      </Link>
     );
   }
 }
